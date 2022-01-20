@@ -17,7 +17,7 @@ const useMarqueeAnimation = (controls: AnimationControls) => {
         },
       });
       if (containerWidth < contentWidth) {
-        const duration = (contentWidth - containerWidth) / 200;
+        const duration = (contentWidth - containerWidth) / 400;
         await controls.start({
           translateX: `${containerWidth - contentWidth}px`,
           transition: {
