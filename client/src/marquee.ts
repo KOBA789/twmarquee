@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
+import React, { useCallback, useLayoutEffect, useState } from "react";
 import { AnimationControls, useAnimation } from "framer-motion";
 
 const useMarqueeAnimation = (controls: AnimationControls) => {
