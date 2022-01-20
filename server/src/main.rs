@@ -29,7 +29,7 @@ fn stream(
 async fn tweet_stream(token: &str) -> impl Stream<Item = Result<String, std::io::Error>> {
     let client = reqwest::Client::new();
     let res = client
-        .get("https://api.twitter.com/2/tweets/search/stream?expansions=author_id&user.fields=name")
+        .get("https://api.twitter.com/2/tweets/search/stream?expansions=author_id&user.fields=username&tweet.fields=text")
         .header(reqwest::header::AUTHORIZATION, format!("Bearer {token}"))
         .send()
         .await
