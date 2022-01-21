@@ -25,7 +25,7 @@ export const App: React.VFC = () => {
     (async () => {
       for (;;) {
         const promise = reader.read();
-        const isEmpty = null == await Promise.race([promise, null]);
+        const isEmpty = (await Promise.race([promise, null])) === null;
         if (isEmpty) {
           await fadeOut(containerControls);
         }
@@ -38,7 +38,11 @@ export const App: React.VFC = () => {
         }
         setTweet(readResult.value);
         await waitToRender();
-        await slideInAndFadeOut(contentControls, measureContainer().width, measureContent().width);
+        await slideInAndFadeOut(
+          contentControls,
+          measureContainer().width,
+          measureContent().width
+        );
         setTweet(null);
       }
     })();
@@ -46,15 +50,31 @@ export const App: React.VFC = () => {
     return () => {
       stream.cancel();
     };
-  }, [containerControls, contentControls, measureContainer, measureContent, waitToRender]);
+  }, [
+    containerControls,
+    contentControls,
+    measureContainer,
+    measureContent,
+    waitToRender,
+  ]);
 
   return (
-    <motion.div animate={containerControls} ref={containerRef} className="container">
-      <motion.span ref={contentRef} animate={contentControls} className="content">
+    <motion.div
+      animate={containerControls}
+      ref={containerRef}
+      className="container"
+    >
+      <motion.span
+        ref={contentRef}
+        animate={contentControls}
+        className="content"
+      >
         {tweet && (
           <>
             <span className="tweet-text">{tweet.data.text}</span>
-            <span className="tweet-username">{tweet.includes.users[0].username}</span>
+            <span className="tweet-username">
+              {tweet.includes.users[0].username}
+            </span>
           </>
         )}
       </motion.span>

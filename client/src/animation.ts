@@ -18,7 +18,11 @@ export const fadeOut = async (controls: AnimationControls) => {
   });
 };
 
-export const slideInAndFadeOut = async (controls: AnimationControls, containerWidth: number, contentWidth: number) => {
+export const slideInAndFadeOut = async (
+  controls: AnimationControls,
+  containerWidth: number,
+  contentWidth: number
+) => {
   controls.set({
     opacity: 1,
     translateX: `${containerWidth}px`,
