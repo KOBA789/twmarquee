@@ -19,6 +19,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
 
+      - name: Build SDK
+        working-directory: sdk
+        run: yarn build
+
       - name: Install Dependencies
         working-directory: client
         run: yarn install --frozen-lockfile
