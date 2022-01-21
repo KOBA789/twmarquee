@@ -69,10 +69,14 @@ async fn main() -> Result<(), rocket::Error> {
         }
     });
 
-    rocket::build()
+    let rocket = rocket::build()
         .manage(tx)
-        .mount("/", rocket::routes![stream])
-        .mount("/", rocket::fs::FileServer::from("./public"))
-        .launch()
+        .mount("/", rocket::routes![stream]);
+    let rocket = if let Some(webroot) = cli.webroot {
+        rocket.mount("/", rocket::fs::FileServer::from(webroot))
+    } else {
+        rocket
+    };
+    rocket.launch()
         .await
 }

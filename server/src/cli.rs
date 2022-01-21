@@ -4,6 +4,8 @@ use clap::{Parser, Subcommand};
 pub struct Cli {
     #[clap(long, env)]
     pub twitter_bearer_token: String,
+    #[clap(long, short)]
+    pub webroot: Option<String>,
     #[clap(subcommand)]
     pub command: Option<Command>,
 }
